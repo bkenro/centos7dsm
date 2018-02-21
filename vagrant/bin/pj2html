@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "replicate a drupal site under /var/www/pj into /var/www/html."
+  echo "usage: pj2html <site directory name>"
+  exit 1;
+fi
+
+sudo rsync -a --delete --exclude "settings.php" --exclude "nbproject" --exclude ".git" --exclude "cache" /var/www/pj/$1/ /var/www/html/$1/
+if [ $? -ne 0 ]; then
+  echo 'error: file sync failed.'
+  exit 2
+fi
+
+cd /var/www/html
+sudo chown -R vagrant:vagrant $1
+sudo chown -R apache:apache $1/sites/default/files
+sudo chmod -R 644 $1
+sudo chmod 755 $1
+sudo find $1 -type d -exec sudo chmod 755 '{}' \;
+
+cd /var/www/pj/$1
+drush sql-dump --gzip --result-file=/tmp/$1.db.mysql
+cd /var/www/html/$1
+gunzip < /tmp/$1.db.mysql.gz | drush sqlc
+rm /tmp/$1.db.mysql.gz
+drush cr
+drush cron
