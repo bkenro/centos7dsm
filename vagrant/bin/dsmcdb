@@ -1,15 +1,29 @@
 #!/usr/bin/bash
 
 if [ $# -lt 1 ]; then
-  echo "create database whose name/pass/user are all <dbname>."
-  echo "usage: dbcrt <dbname>"
+  echo "usage: dsmcdb <name>"
+  echo "creates database whose name/user/pass are all <name>."
   exit 1;
 fi
 
+msg=`mysql -u $1 -p$1 -se"USE $1;" 2>&1`
+
+if [ "$msg" == "" ]; then
+  echo "All data in existing database $1 will be removed. Continue? [Y/n]"
+  read ANSWER
+  case $ANSWER in
+    "Y" | "y" | "yes" | "Yes" | "YES" )
+      ;;
+    * ) echo "Cancelled."; 
+      exit 2;
+      ;;
+  esac
+fi
+
 mysql -u root -p <<EOF
-create database $1;
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP,
-INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES
-ON $1.* TO '$1'@'localhost' IDENTIFIED BY '$1';
+DROP DATABASE IF EXISTS $1;
+CREATE DATABASE $1 CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, 
+CREATE TEMPORARY TABLES ON $1.* TO '$1'@'localhost' IDENTIFIED BY '$1';
 flush privileges;
 EOF
