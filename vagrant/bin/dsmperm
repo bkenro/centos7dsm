@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "reconfigure permissions for files in existing site."
+  echo "usage: dsmprepare <sitedir>"
+  exit 1;
+fi
+
+cd $1/sites/default 
+
+sudo chgrp apache settings.php
+sudo chmod 640 settings.php
+sudo chmod 2775 files
+sudo chgrp -R apache files

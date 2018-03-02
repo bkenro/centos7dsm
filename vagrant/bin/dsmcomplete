@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "run finall setup process for drupal installation."
+  echo "usage: dsmcomplete <sitedir>"
+  exit 1;
+fi
+
+cd $1/sites/default
+echo "\$settings['trusted_host_patterns'] = array('^192.168.12.34\$');" >> settings.php
+sudo chmod 440 settings.php

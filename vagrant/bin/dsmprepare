@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "prepare settings.php and files directory for new installation."
+  echo "usage: dsmprepare <sitedir>"
+  exit 1;
+fi
+
+cd $1/sites/default 
+
+if [ ! -f settings.php ]; then
+  cp default.settings.php settings.php
+fi
+
+if [ ! -d files ]; then
+  mkdir files
+fi
+
+sudo chgrp apache settings.php
+sudo chmod 2775 files
+sudo chmod g+w settings.php
+sudo chgrp -Rv apache files
