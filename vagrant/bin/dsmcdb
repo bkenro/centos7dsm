@@ -2,7 +2,7 @@
 
 if [ $# -lt 1 ]; then
   echo "usage: dsmcdb <name>"
-  echo "creates database whose name/user/pass are all <name>."
+  echo "Create database whose name/user/pass are all <name>."
   exit 1;
 fi
 

@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 if [ $# -lt 1 ]; then
-  echo "reconfigure permissions for files in existing site."
-  echo "usage: dsmprepare <sitedir>"
+  echo "usage: dsmperm <sitedir>"
+  echo "Reconfigure permission for files in existing site."
   exit 1;
 fi
 

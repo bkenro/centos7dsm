@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 if [ $# -lt 1 ]; then
-  echo "run finall setup process for drupal installation."
   echo "usage: dsmcomplete <sitedir>"
+  echo "Run finall setup process for drupal installation."
   exit 1;
 fi
 

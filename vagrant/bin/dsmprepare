@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 if [ $# -lt 1 ]; then
-  echo "prepare settings.php and files directory for new installation."
   echo "usage: dsmprepare <sitedir>"
+  echo "Prepare settings.php and files directory for new installation."
   exit 1;
 fi
 
