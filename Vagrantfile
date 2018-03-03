@@ -10,8 +10,4 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "vagrant/", "/vagrant", type: "virtualbox", mount_options: ['dmode=777','fmode=777']
   config.vm.synced_folder "pj/", "/var/www/pj", type: "virtualbox", mount_options: ['dmode=777','fmode=777']
-  config.vm.provision "shell", run: "always", inline: <<-SHELL
-#    systemctl restart network.service
-#    systemctl restart httpd.service
-  SHELL
 end
