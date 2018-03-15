@@ -12,7 +12,7 @@ if [ "$msg" == "" ]; then
   echo "All data in existing database $1 will be removed. Continue? [Y/n]"
   read ANSWER
   case $ANSWER in
-    "Y" | "y" | "yes" | "Yes" | "YES" )
+    "" | "Y" | "y" | "yes" | "Yes" | "YES" )
       ;;
     * ) echo "Cancelled."; 
       exit 2;
