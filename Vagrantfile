@@ -8,9 +8,9 @@ Vagrant.configure("2") do |config|
   end
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "vagrant/", "/vagrant", type: "virtualbox", mount_options: ['dmode=777','fmode=777']
-  config.vm.provision "shell", run: "always", inline: <<-SHELL
-    ln -s /vagrant/bin /home/vagrant/bin
-    ln -s /var/www/html /home/vagrant/html
+  config.vm.provision "shell", inline: <<-SHELL
+    ln -s /vagrant/bin /home/vagrant/
+    ln -s /var/www/html /home/vagrant/
     chown vagrant:vagrant /var/www
   SHELL
 end
