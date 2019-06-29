@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.12.34"
   config.vm.hostname = "centos7dsm.local"
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "vm-centos7dsm-0.2.0"
+    vb.name = "vm-centos7dsm-0.3.0"
     vb.customize ["modifyvm", :id, "--memory", "1024"]
   end
   config.vm.synced_folder ".", "/vagrant", disabled: true
